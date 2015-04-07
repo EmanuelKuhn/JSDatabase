@@ -1,0 +1,278 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+item, tab-view, card, main, action-bar {
+	display: block;
+}
+
+h1 {
+	font-size: 32;
+	padding: 5px;
+	color: rgba(255, 255, 255, 0.88);
+}
+
+h2 {
+	font-size: 24;
+	padding: 5px;
+	color: rgba(255, 255, 255, 0.88);
+}
+
+html, body, app {
+	display: block;
+	overflow: hidden;
+	width: 100vw;
+	min-height: 100vh;
+	font-family: helvetica, arial;
+}
+
+/*app {
+	background: blue;
+	overflow: hidden;
+}
+*/
+header {
+	display: block;
+	width: 100vw;
+	height: 50px;
+	background: #303F9F;
+	color: rgba(255, 255, 255, 0.87);
+}
+
+side {
+	display: block;
+	float: left;
+	min-width: 250px;
+	height: calc(100vh - 50px);
+	background: #283593;
+	color: rgba(255, 255, 255, 0.87);
+}
+
+side h1 {
+	display: block;
+	padding-bottom: 7px;
+	border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+list {
+	display: block;
+	height: calc(90% - 30px);
+	overflow: scroll;
+}
+
+spacer {
+	display: block;
+	padding: 10px;
+	padding-left: 15px;
+}
+
+list spacer {
+	height: 40px;
+	margin: 5px;
+}
+
+action-bar {
+	width: 100%;
+	height: 10px;
+	font-size: 20px;
+}
+
+action-bar button{
+	height: 30px;
+	width: 90px;
+	margin-left: 20px;
+}
+
+button{
+	height: 30px;
+	width: 90px;
+}
+
+item {
+	display: block;
+	background: #283593;
+	height: 40px;
+	font-size: 18px;
+	line-height: 36px;
+	padding: 10px;
+	padding-left: 15px;
+	margin: 5px;
+}
+
+item[selected] {
+	background: #0091EA;
+}
+
+tab-view, card {
+	height: calc(100vh - 50px);
+	width: 100%;
+}
+
+tab-view h1 {
+	display: block;
+	color: rgba(0, 0, 0, 0.87);
+}
+
+@media screen and (min-width: 1050px) {
+    tab-view card {
+		width: 750px;
+		height: 500px;
+		margin-left: calc(50% - 375px);
+		margin-top: calc(50vh - 50px - 255px);
+		box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
+	}
+}
+
+tab-view card {
+	background: white;
+}
+
+card group {
+	display: block;
+	padding: 40px;
+}
+
+group h1 {
+	padding: 0;
+}
+
+tab-view {
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+tab-view spacer {
+	height: 1500px;
+}
+
+main {
+	display: block;
+	float: left;
+	min-width: calc(100vw - 250px);
+	height: calc(100vh - 50px);
+	background: #E8EAF6;
+	color: white;
+
+}
+
+main header {
+	display: block;
+	width: 100%;
+	height: 50px;
+	background: #3F51B5;
+	padding-left: calc(50% - 150px);
+
+}
+
+main header item {
+	height: 30px;
+	background: #3F51B5;
+	max-width: 100px;
+	float: left;
+	margin: 0;
+}
+
+main header item[selected] {
+	border-bottom: 5px solid white;
+	height: 25px;
+
+}
+
+
+
+
+/* http://codepen.io/sevilayha/pen/IdGKH */
+
+/* form starting stylings ------------------------------- */
+.group 			  { 
+  position:relative; 
+  margin-bottom:45px; 
+}
+input 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+input:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+label 				 {
+  color:#999; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#5264AE;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block; width:300px; }
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#5264AE; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%; 
+  width:100px; 
+  top:25%; 
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}

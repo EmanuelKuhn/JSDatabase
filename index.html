@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+
+	<title>Database</title>
+
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="stylesheet" type="text/css" href="assets/waves.min.css">
+</head>
+<body>
+	<header>
+		<h1>Database</h1>
+	</header>
+	<side>
+		<h1>Select Table:</h1>
+		<list id="select-table">
+		</list>
+		<action-bar>
+			<button onclick="ui.newTable()">
+				New Table
+			</button>
+			<button onclick="ui.dropTable()">
+				Drop Table
+			</button>
+		</action-bar>
+	</side>
+	<main>
+		<header>
+			<item class="waves-effect waves-block waves-light" onclick="ui.selectPrevRow()">
+				&#60;
+			</item>
+			<item class="waves-effect waves-block waves-light" onclick="ui.selectNextRow()">
+				&#62;
+			</item>
+			<item class="waves-effect waves-block waves-light" onclick="ui.addRow()">
+				add row
+			</item>
+			<item class="waves-effect waves-block waves-light" onclick="ui.clearRow()">
+				clear row
+			</item>
+
+
+
+
+<!-- 			<item class="waves-effect waves-block waves-light" onclick="selectMode('view')">
+				View
+			</item>
+			<item class="waves-effect waves-block waves-light" onclick="selectMode('edit')" selected>
+				Edit
+			</item>
+			<item class="waves-effect waves-block waves-light" onclick="selectMode('structure')">
+				Structure
+			</item>
+ -->		
+ 		</header>
+		<tab-view>
+			<card id="card-view">
+			</card>
+			<!-- <spacer></spacer>-->
+		</tab-view>
+	</main>
+
+	<script id="select-table-template" type="text/x-handlebars-template">
+		{{#each Tables}}
+			<item class="waves-effect waves-block waves-light" onclick="selectCurrentTable('{{@key}}')" {{attr}}>
+				{{@key}}
+			</item>
+		{{/each}}
+	<spacer height=></spacer>
+	</script>
+
+	<script id="card-edit-template" type="text/x-handlebars-template">
+		<group>
+			<h1 class="group">
+				ID: {{__selectedRow}}
+			</h1>
+
+			{{#each __currentRow}}
+		    <div class="group">      
+				<input id="{{../__selectedTable}}-{{../__selectedRow}}-{{@key}}" type="text" {{formAttr}} value="{{this}}" oninput="ui.edit.commitValues('{{../__selectedTable}}', '{{../__selectedRow}}', '{{@key}}', '{{this}}')">
+		      	<span class="highlight"></span>
+	    		<span class="bar"></span>
+			    <label>{{@key}}</label>
+			</div>
+
+			{{/each}}
+
+			<button class="group" onclick="ui.edit.addField()">
+				Add Field
+			</button>
+	<!--
+		    <div class="group">      
+				<input type="text" required>
+		      	<span class="highlight"></span>
+	    		<span class="bar"></span>
+			    <label>Name</label>
+			</div>
+	-->
+
+	   </group>
+	</script>
+
+
+	<script src="assets/handlebars.js"></script>
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script src="assets/waves.min.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>
