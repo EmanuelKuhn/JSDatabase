@@ -36,10 +36,11 @@ db.dropTable = function (name, commit) {
 };
 
 db.addRow = function (tableName, content, commit) {
-  if (!tableName)
+  if (!tableName){
     return "error: db.addRow: no tableName specified";
-  // var content = '' || content ;
-  var row = DB.Tables[tableName].push({});
+  }
+  var content = content || {};
+  var row = DB.Tables[tableName].push(content);
   if (commit) {
     db.commit();
   }
@@ -200,6 +201,7 @@ ui.newTable = function () {
     console.log(e);
   }
   selectedTable = tableName;
+  selectedRow = 0;
   updateAllViews();
 };
 
@@ -264,13 +266,29 @@ ui.selectNextRow = function () {
 };
 
 ui.addRow = function () {
-  var lastRow = db.addRow(selectedTable);
+  var row = {};
+  var selectedRowContent = DB.Tables[selectedTable][selectedRow];
+  for(var key in selectedRowContent) {
+    row[key] = '';
+  }
+  var lastRow = db.addRow(selectedTable, row);
   this.selectRow(lastRow);
+}
+
+ui.copyRowStructure = function (){
+  var rowToCopyFromID = prompt("Row to copy structure from: ", '');
+  var rowToCopyToID = prompt("Row to copy structure to: ", '');
+  var rowToCopyFrom = DB.Tables[selectedTable][rowToCopyFromID];
+  var rowStructure;
+  for(var key in rowToCopyFrom) {
+    rowStructure[key] = '';
+  }
+  DB.Tables[selectedTable][rowToCopyToID] = rowStructure;
 }
 
 ui.clearRow = function () {
   db.clearRow(selectedTable, selectedRow, commit);
-  updateAllViews ();
+  updateAllViews ();  
 }
 
 Waves.displayEffect();
